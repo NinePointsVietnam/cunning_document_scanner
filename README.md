@@ -81,42 +81,37 @@ platform :ios, '13.0'
      end
    end
    ```
-3. Add this line to your Podfile in your project:
-
-```
-pod 'WeScan', :path => '.symlinks/plugins/cuning_document_scanner/ios/WeScan-3.0.0'
-```
-
-=> like this below:
-
-```
-target 'Runner' do
-  use_frameworks!
-  use_modular_headers!
-  pod 'WeScan', :path => '.symlinks/plugins/cuning_document_scanner/ios/WeScan-3.0.0'
-  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
-end
-```
 
 ## How to use ?
 
 The easiest way to get a list of images is:
 
-```
-    final imagesPath = await CunningDocumentScanner.getPictures()
+```dart
+   final imagesPath = await CunningDocumentScanner.getPictures();
 ```
 ### Android Specific
 
 There are some features in Android that allow you to adjust the scanner that will be ignored in iOS:
 
+```dart
+   final imagesPath = await CunningDocumentScanner.getPictures(
+      noOfPages: 1, // Limit the number of pages to 1
+      isGalleryImportAllowed, // Allow the user to also pick an image from his gallery
+   );
 ```
-    final imagesPath = await CunningDocumentScanner.getPictures(
-      androidOptions: const AndroidScannerOptions(
-         noOfPages: 1, // Limit the number of pages to 1
-         isGalleryImportAllowed: true, // Allow the user to also pick an image from his gallery
-         scannerMode: AndroidScannerMode.scannerModeFull,
-      )
-    )
+
+### iOS Specific
+
+On iOS it is possible to configure which image format should be used to save of the document scans. Available options are PNG (default) or JPEG. In certain situations the JPEG format could drastically reduce the file size of the final scan. If you choose to use JPEG you can also specify a compression quality, where 0.0 is highest compression (lowest quality) and 1.0 (default) is the lowest compression (highest quality). Example usage is:
+
+```dart
+   // Returns images in JPEG format with a compression quality of 50%. 
+   final imagesPath = await CunningDocumentScanner.getPictures(
+      iosScannerOptions: IosScannerOptions(
+         imageFormat: IosImageFormat.jpg,
+         jpgCompressionQuality: 0.5,
+      ),
+   );
 ```
 
 ## Installation
