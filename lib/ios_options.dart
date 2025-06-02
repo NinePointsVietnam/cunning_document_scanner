@@ -22,6 +22,14 @@ final class IosScannerOptions {
   const IosScannerOptions({
     this.imageFormat = IosImageFormat.png,
     this.jpgCompressionQuality = 1.0,
+    this.isGalleryImportAllowed = false,
+    this.useWeScan = false,
+    this.noOfPages = 1,
+    this.isAutoScanEnabled = false,
+    this.isAutoScanAllowed = false,
+    this.isFlashAllowed = false,
+    this.backgroundColor,
+    this.tintColor,
   });
 
   final IosImageFormat imageFormat;
@@ -34,4 +42,29 @@ final class IosScannerOptions {
   /// [jpgCompressionQuality] only has an effect if the [imageFormat] is set to
   /// [IosImageFormat.jpeg] and is ignored otherwise.
   final double jpgCompressionQuality;
+
+  /// Indicates whether the WeScan library should be used for scanning.
+  final bool useWeScan;
+
+  /// Indicates whether the gallery import feature is allowed.
+  /// This allows users to import images from the gallery
+  final bool isGalleryImportAllowed;
+
+  /// The number of pages to scan.
+  final int noOfPages;
+
+  /// Indicates whether the auto scan feature is enabled.
+  final bool isAutoScanEnabled;
+
+  /// Indicates whether the auto scan feature is allowed.
+  final bool isAutoScanAllowed;
+
+  /// Indicates whether the flash is allowed to be used during scanning.
+  final bool isFlashAllowed;
+
+  /// Optional background color for the scanner UI.
+  final int? backgroundColor;
+
+  /// Optional tint color for the scanner UI.
+  final int? tintColor;
 }

@@ -1,7 +1,9 @@
-import 'dart:io';
-import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:io';
+
 import 'package:cunning_document_scanner/cunning_document_scanner.dart';
+import 'package:cunning_document_scanner/ios_options.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,8 +38,7 @@ class _MyAppState extends State<MyApp> {
         body: SingleChildScrollView(
             child: Column(
           children: [
-            ElevatedButton(
-                onPressed: onPressed, child: const Text("Add Pictures")),
+            ElevatedButton(onPressed: onPressed, child: const Text("Add Pictures")),
             for (var picture in _pictures) Image.file(File(picture))
           ],
         )),
@@ -49,10 +50,24 @@ class _MyAppState extends State<MyApp> {
     List<String> pictures;
     try {
       pictures = await CunningDocumentScanner.getPictures(
-              iosScannerOptions: IosScannerOptions(
-            imageFormat: IosImageFormat.jpg,
-            jpgCompressionQuality: 0.5,
-          )) ??
+            noOfPages: 1,
+            isGalleryImportAllowed: true,
+            androidOptions: const AndroidScannerOptions(
+              scannerMode: AndroidScannerMode.scannerModeBase,
+            ),
+            iosScannerOptions: const IosScannerOptions(
+              isGalleryImportAllowed: true,
+              isFlashAllowed: true,
+              isAutoScanAllowed: true,
+              isAutoScanEnabled: true,
+              useWeScan: true,
+              noOfPages: 1,
+              imageFormat: IosImageFormat.jpg,
+              // imageFormat: IosImageFormat.jpg,
+              // backgroundColor: Color(0xFF333333)..withOpacity(0.8),
+              // tintColor: Colors.white,
+            ),
+          ) ??
           [];
       if (!mounted) return;
       setState(() {
