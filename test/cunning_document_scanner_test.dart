@@ -8,25 +8,22 @@ import 'mocks/mock_permission_handler_platform.dart';
 void main() {
   group('CunningDocumentScanner permission denied', () {
     setUp(() {
-      PermissionHandlerPlatform.instance = MockPermissionHandlerPlatform(
-          permissionStatus: PermissionStatus.denied);
+      PermissionHandlerPlatform.instance = MockPermissionHandlerPlatform(permissionStatus: PermissionStatus.denied);
     });
 
     test('getPictures with denied permission', () async {
-      expect(() async => await CunningDocumentScanner.getPictures(),
-          throwsA(isA<Exception>()));
+      expect(() async => await CunningDocumentScanner.getPictures(), throwsA(isA<Exception>()));
     });
   });
 
   group('CunningDocumentScanner permission permanently denied', () {
     setUp(() {
-      PermissionHandlerPlatform.instance = MockPermissionHandlerPlatform(
-          permissionStatus: PermissionStatus.permanentlyDenied);
+      PermissionHandlerPlatform.instance =
+          MockPermissionHandlerPlatform(permissionStatus: PermissionStatus.permanentlyDenied);
     });
 
     test('getPictures with permanently denied permission', () async {
-      expect(() async => await CunningDocumentScanner.getPictures(),
-          throwsA(isA<Exception>()));
+      expect(() async => await CunningDocumentScanner.getPictures(), throwsA(isA<Exception>()));
     });
   });
 
@@ -37,8 +34,7 @@ void main() {
     });
 
     test('getPictures with MissingPluginException', () async {
-      expect(() async => await CunningDocumentScanner.getPictures(),
-          throwsA(isA<MissingPluginException>()));
+      expect(() async => await CunningDocumentScanner.getPictures(), throwsA(isA<MissingPluginException>()));
     });
   });
 

@@ -19,7 +19,7 @@ class CunningDocumentScanner {
 
   /// Call this to start get Picture workflow.
   static Future<List<String>?> getPictures({
-    noOfPages = 1,
+    noOfPages = 100,
     isGalleryImportAllowed = false,
     AndroidScannerOptions androidOptions = _defaultAndroidOptions,
     IosScannerOptions iosScannerOptions = _defaultIOSOptions,
@@ -49,7 +49,13 @@ class CunningDocumentScanner {
         'noOfPages': noOfPages,
         'useWeScan': iosScannerOptions.useWeScan,
       });
+    } else {
+      pictures = await _channel.invokeMethod('getPictures', {
+        'noOfPages': noOfPages,
+        'isGalleryImportAllowed': isGalleryImportAllowed,
+      });
     }
+
     return pictures?.map((e) => e as String).toList();
   }
 }

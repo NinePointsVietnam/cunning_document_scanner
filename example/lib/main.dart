@@ -51,21 +51,17 @@ class _MyAppState extends State<MyApp> {
     try {
       pictures = await CunningDocumentScanner.getPictures(
             noOfPages: 1,
-            isGalleryImportAllowed: true,
+            isGalleryImportAllowed: false,
             androidOptions: const AndroidScannerOptions(
               scannerMode: AndroidScannerMode.scannerModeBase,
             ),
             iosScannerOptions: const IosScannerOptions(
-              isGalleryImportAllowed: true,
               isFlashAllowed: true,
               isAutoScanAllowed: true,
               isAutoScanEnabled: true,
               useWeScan: true,
               noOfPages: 1,
               imageFormat: IosImageFormat.jpg,
-              // imageFormat: IosImageFormat.jpg,
-              // backgroundColor: Color(0xFF333333)..withOpacity(0.8),
-              // tintColor: Colors.white,
             ),
           ) ??
           [];
