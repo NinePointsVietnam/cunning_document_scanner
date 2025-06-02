@@ -47,8 +47,6 @@ class CunningDocumentScanner {
       throw Exception("Permission not granted");
     }
 
-    print('Options: $androidOptions, ${iosScannerOptions.useWeScan}');
-
     List<dynamic>? pictures;
     if (Platform.isAndroid) {
       pictures = await _channel.invokeMethod('getPictures', {

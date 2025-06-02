@@ -98,9 +98,7 @@ struct CunningScannerOptions {
         let isFlashAllowed: Bool = (scannerOptionsDict!["isFlashAllowed"] as? Bool) ?? false
         let isGalleryImportAllowed: Bool = (scannerOptionsDict!["isGalleryImportAllowed"] as? Bool) ?? false
         let backgroundColor: Int? = (scannerOptionsDict!["backgroundColor"] as? Int)
-        let tintColor: Int? = (scannerOptionsDict!["tintColor"] as? Int)
-        
-        print("useWeScan: \(useWeScan)")
+        let tintColor: Int? = (scannerOptionsDict!["tintColor"] as? Int)            
         
         return CunningScannerOptions(
             imageFormat: CunningScannerImageFormat(rawValue: imageFormat) ?? CunningScannerImageFormat.png,
