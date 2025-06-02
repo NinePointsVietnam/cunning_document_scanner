@@ -50,9 +50,10 @@ class _MyAppState extends State<MyApp> {
     List<String> pictures;
     try {
       pictures = await CunningDocumentScanner.getPictures(
+            noOfPages: 1,
+            isGalleryImportAllowed: true,
             androidOptions: const AndroidScannerOptions(
               scannerMode: AndroidScannerMode.scannerModeBase,
-              isGalleryImportAllowed: true,
             ),
             iosScannerOptions: const IosScannerOptions(
               isGalleryImportAllowed: true,
