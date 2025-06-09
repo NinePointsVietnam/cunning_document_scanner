@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import WeScan
 
 class FileUtils{
     static func getDocumentsDirectory() -> URL {
@@ -14,8 +15,16 @@ class FileUtils{
         return documentsDirectory
     }
     
-    static func saveImage(image: UIImage) -> String? {
-        guard let data = image.pngData() else {
+    static func saveImage(image: UIImage, imageFormat: CunningScannerImageFormat, jpgCompressionQuality: Double) -> String? {
+        if imageFormat == .jpg {
+            return saveJpgImage(image: image, jpgCompressionQuality: jpgCompressionQuality)
+        } else {
+            return savePngImage(image: image)
+        }        
+    }
+
+    static func saveJpgImage(image: UIImage, jpgCompressionQuality: Double) -> String? {
+        guard let data = image.jpegData(compressionQuality: CGFloat(jpgCompressionQuality)) else {
             return nil
         }
         
@@ -24,29 +33,33 @@ class FileUtils{
         let df = DateFormatter()
         df.dateFormat = "yyyyMMdd-HHmmss"
         let formattedDate = df.string(from: currentDateTime)
-        let filePath = tempDirPath.appendingPathComponent(formattedDate + ".png")
-        
-        do {
-            let fileManager = FileManager.default
-            // Check if file exists
-            if fileManager.fileExists(atPath: filePath.path) {
-                // Delete file
-                try fileManager.removeItem(atPath: filePath.path)
-            }
-            else {
-                print("File does not exist")
-            }
-        }
-        catch let error as NSError {
-            print("An error took place: \(error)")
-        }
+        let filePath = tempDirPath.appendingPathComponent(formattedDate + ".jpg")
         
         do {
             try data.write(to: filePath)
             return filePath.path
+        } catch {
+            print(error.localizedDescription)
+            return nil
         }
-        
-        catch {
+    }
+
+    static func savePngImage(image: UIImage) -> String? {
+        guard let data = image.pngData() else {
+            return nil
+        }
+
+        let tempDirPath = getDocumentsDirectory()
+        let currentDateTime = Date()
+        let df = DateFormatter()
+        df.dateFormat = "yyyyMMdd-HHmmss"
+        let formattedDate = df.string(from: currentDateTime)
+        let filePath = tempDirPath.appendingPathComponent(formattedDate + ".png")
+
+        do {
+            try data.write(to: filePath)
+            return filePath.path
+        } catch {
             print(error.localizedDescription)
             return nil
         }

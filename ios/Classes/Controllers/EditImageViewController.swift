@@ -16,13 +16,18 @@ class EditImageViewController : UIViewController{
     var captureImage: UIImage!;
     var quad: Quadrilateral?
     var controller: WeScan.EditImageViewController!
+    var imageFormat: CunningScannerImageFormat = .png
+    var jpgCompressionQuality: Double = 1.0
     
-    public func setParams(result: @escaping FlutterResult,  image: UIImage!, quad: Quadrilateral?) {
+    
+    public func setParams(result: @escaping FlutterResult,  image: UIImage!, quad: Quadrilateral?, imageFormat: CunningScannerImageFormat = .png, jpgCompressionQuality: Double = 1.0) {
         self.result = result
         self.captureImage = image
         self.quad = quad
+        self.imageFormat = imageFormat
+        self.jpgCompressionQuality = jpgCompressionQuality
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -65,7 +70,7 @@ class EditImageViewController : UIViewController{
     func pushReviewImageViewController(image: UIImage){
         guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "ReviewImageViewController") as? ReviewImageViewController
             else { return }
-        controller.setParams(result: result, image: image)
+        controller.setParams(result: result, image: image, imageFormat: imageFormat, jpgCompressionQuality: jpgCompressionQuality)
         navigationController?.pushViewController(controller, animated: false)
     }
 }

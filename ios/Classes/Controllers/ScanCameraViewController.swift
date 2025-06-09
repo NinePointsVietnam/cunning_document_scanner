@@ -23,6 +23,8 @@ final class ScanCameraViewController: UIViewController {
     var isAutoScanEnabled: Bool = true
     var isAutoScanAllowed: Bool = true
     var isFlashAllowed: Bool = true
+    var imageFormat: CunningScannerImageFormat = .png
+    var jpgCompressionQuality: Double = 1.0
     var result: FlutterResult!;
     
     var flashEnabled = false;
@@ -34,12 +36,14 @@ final class ScanCameraViewController: UIViewController {
         setupView()
     }
     
-    public func setParams(result: @escaping FlutterResult,  isGalleryImportAllowed: Bool, isAutoScanEnabled: Bool, isAutoScanAllowed: Bool, isFlashAllowed: Bool) {
+    public func setParams(result: @escaping FlutterResult,  isGalleryImportAllowed: Bool, isAutoScanEnabled: Bool, isAutoScanAllowed: Bool, isFlashAllowed: Bool, imageFormat: CunningScannerImageFormat = .png, jpgCompressionQuality: Double = 1.0) {
         self.result = result
         self.isGalleryImportAllowed = isGalleryImportAllowed
         self.isAutoScanEnabled = isAutoScanEnabled
         self.isAutoScanAllowed = isAutoScanAllowed
         self.isFlashAllowed = isFlashAllowed
+        self.imageFormat = imageFormat
+        self.jpgCompressionQuality = jpgCompressionQuality
     }
 
     private func setupView() {

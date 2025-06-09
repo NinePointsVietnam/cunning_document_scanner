@@ -96,9 +96,11 @@ public class SwiftCunningDocumentScannerPlugin: NSObject, FlutterPlugin, VNDocum
                     isGalleryImportAllowed: options.isGalleryImportAllowed,
                     isAutoScanEnabled: options.isAutoScanEnabled,
                     isAutoScanAllowed: options.isAutoScanAllowed,
-                    isFlashAllowed: options.isFlashAllowed
+                    isFlashAllowed: options.isFlashAllowed,
+                    imageFormat: options.imageFormat,
+                    jpgCompressionQuality: options.jpgCompressionQuality
                 )
-                
+
                 viewController.present(controller, animated: true, completion: nil)
             } else {
                 result(nil)
