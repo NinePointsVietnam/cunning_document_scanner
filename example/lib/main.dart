@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
     try {
       pictures = await CunningDocumentScanner.getPictures(
             noOfPages: 1,
-            isGalleryImportAllowed: false,
+            isGalleryImportAllowed: true,
             androidOptions: const AndroidScannerOptions(
               scannerMode: AndroidScannerMode.scannerModeBase,
             ),
@@ -69,6 +69,7 @@ class _MyAppState extends State<MyApp> {
       setState(() {
         _pictures = pictures;
       });
+      print("Pictures: $_pictures");
     } catch (exception) {
       // Handle exception here
     }

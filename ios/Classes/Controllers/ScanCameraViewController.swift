@@ -104,10 +104,10 @@ final class ScanCameraViewController: UIViewController {
     }
     
     private func setFlashButtonView() {
-        let imageOff = SVGKImage(named: "flash_off",in: Bundle(for: CunningDocumentScannerPlugin.self)).uiImage
-        
-        let imageOn = SVGKImage(named: "flash_on",in: Bundle(for: CunningDocumentScannerPlugin.self)).uiImage
-        
+        let imageOff = UIImage(systemName: "bolt.slash")   
+
+        let imageOn = UIImage(systemName: "bolt")
+
         let flashButton = UIBarButtonItem()
         flashButton.image = flashEnabled ? imageOn : imageOff
         flashButton.target = self
@@ -165,7 +165,7 @@ final class ScanCameraViewController: UIViewController {
     func pushEditDocumentViewController(image: UIImage, quad: Quadrilateral?){
         guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "EditImageViewController") as? EditImageViewController
             else { return }
-        controller.setParams(result: result, image: image, quad: quad)
+        controller.setParams(result: result, image: image, quad: quad, imageFormat: imageFormat, jpgCompressionQuality: jpgCompressionQuality)
         navigationController?.pushViewController(controller, animated: false)
     }
 }
