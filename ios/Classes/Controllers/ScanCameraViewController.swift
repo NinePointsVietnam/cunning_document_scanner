@@ -7,7 +7,6 @@
 
 import UIKit
 import WeScan
-import SVGKit
 
 final class ScanCameraViewController: UIViewController {
 
