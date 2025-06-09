@@ -40,6 +40,8 @@ class CunningDocumentScanner {
       });
     } else if (Platform.isIOS) {
       pictures = await _channel.invokeMethod('getPictures', {
+        'imageFormat': iosScannerOptions.imageFormat.name,
+        'jpgCompressionQuality': iosScannerOptions.jpgCompressionQuality,
         'isGalleryImportAllowed': isGalleryImportAllowed,
         'isAutoScanAllowed': iosScannerOptions.isAutoScanAllowed,
         'isAutoScanEnabled': iosScannerOptions.isAutoScanEnabled,
